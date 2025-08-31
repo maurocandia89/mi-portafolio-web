@@ -737,6 +737,12 @@ h6 {
 #skills .container .div-card .angular {
   background-image: url("../img/icon/angular.png");
 }
+#skills .container .div-card .vercel {
+  background-image: url("../img/icon/vercel.png");
+}
+#skills .container .div-card .postgre {
+  background-image: url("../img/icon/postgre.png");
+}
 
 /*Icons - Tools & Other Skills */
 
@@ -752,17 +758,19 @@ h6 {
 #skills .container .div-card .devops {
   background-image: url("../img/icon/devops.png");
 }
-#skills .container .div-card .postgre {
-  background-image: url("../img/icon/postgre.png");
+#skills .container .div-card .vercel {
+  background-image: url("../img/icon/vercel.png");
 }
-
+#skills .container .div-card .render {
+  background-image: url("../img/icon/render.png");
+}
 /*Icons - Languages */
 
-#skills .container .div-card .sinhala {
-  background-image: url("../img/icon/lang-si.png");
+#skills .container .div-card .spanish {
+  background-image: url("../img/icon/spanish.png");
 }
 #skills .container .div-card .english {
-  background-image: url("../img/icon/lang-en.png");
+  background-image: url("../img/icon/english.png");
 }
 #skills .container .div-card .tamil {
   background-image: url("../img/icon/lang-ta.png");
