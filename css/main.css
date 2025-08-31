@@ -527,7 +527,7 @@ h6 {
   font-weight: 900;
 }
 
-#intro .img img {
+/* #intro .img img {
   width: 100%;
   position: relative;
   -webkit-mask: url(../img/clip.webp);
@@ -538,6 +538,15 @@ h6 {
   mask-size: contain;
   border-radius: 4px;
   cursor: grab;
+} */
+
+#intro .img img {
+  width: 250px; /* Define un ancho fijo, por ejemplo, 250px */
+  height: 250px; /* Define un alto fijo, igual que el ancho */
+  object-fit: cover; /* Asegura que la imagen se ajuste bien sin deformarse */
+  border-radius: 50%; /* Esto convierte la imagen en un círculo */
+  cursor: grab;
+  /* Ya no necesitas las propiedades de máscara, así que están comentadas o eliminadas */
 }
 
 #about {
@@ -581,6 +590,9 @@ h6 {
 }
 
 #bio .img {
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
   position: relative;
   top: 20px;
   padding: 0 50px;
@@ -719,6 +731,12 @@ h6 {
 #skills .container .div-card .react-js {
   background-image: url("../img/icon/react-js.png");
 }
+#skills .container .div-card .c-sharp {
+  background-image: url("../img/icon/c-sharp.png");
+}
+#skills .container .div-card .angular {
+  background-image: url("../img/icon/angular.png");
+}
 
 /*Icons - Tools & Other Skills */
 
@@ -733,6 +751,9 @@ h6 {
 }
 #skills .container .div-card .devops {
   background-image: url("../img/icon/devops.png");
+}
+#skills .container .div-card .postgre {
+  background-image: url("../img/icon/postgre.png");
 }
 
 /*Icons - Languages */

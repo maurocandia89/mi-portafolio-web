@@ -794,7 +794,7 @@ setTimeout(() => {
 // Preloader text handling
 
 new Typewriter(".loading-text", {
-  strings: ["Lakshan Is Thinking..."],
+  strings: ["Profile Is Thinking..."],
   autoStart: true,
   delay: 50,
   cursor: "|",
