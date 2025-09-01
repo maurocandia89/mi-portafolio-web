@@ -903,7 +903,7 @@ const projectData = [
     title: "Wabi Fun Club",
     thumbnail: "/img/profile_pic/wabiApp.jpeg",
     descriptionKey: "projects.descriptions.wabi",
-    techStack: ["NET MAUI", "MUI"],
+    techStack: ["Kotlin", "Sweet"],
     srcURL: "https://play.google.com/store/apps/details?id=app.quickpass.user.wabi&pcampaignid=web_share",
   },
   {
