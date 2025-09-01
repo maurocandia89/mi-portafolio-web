@@ -136,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         localStorage.setItem('lang', lang);
         
-        // Dispara un evento personalizado para notificar a otros scripts
         const event = new Event('languageChanged');
         document.dispatchEvent(event);
     }
@@ -154,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    
     document.dispatchEvent(new Event('translationsLoaded'));
 });
 

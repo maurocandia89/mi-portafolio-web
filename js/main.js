@@ -1094,15 +1094,13 @@ function loadContent(projectData) {
   }
 }
 
-// Escucha los eventos para cargar los proyectos.
-document.addEventListener('translationsLoaded', () => {
-    loadContent(projectData);
-});
+// document.addEventListener('translationsLoaded', () => {
+//     loadContent(projectData);
+// });
 document.addEventListener('languageChanged', () => {
     loadContent(projectData);
 });
 
-// Github data display
 async function getRepoList() {
   try {
     const response = await fetch("https://api.github.com/users/maurocandia89/repos");
