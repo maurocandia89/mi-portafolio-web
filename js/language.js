@@ -50,6 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
             "footer.supportHeading": "Soporte",
             "footer.getInTouchHeading": "Ponte en contacto",
             "footer.copyrightText": "Copyright &copy; 2020-2024 | Todos los derechos reservados. Hecho con <span id='heart-icon'>&#10084;</span> por <a href='https://MauroCandia.github.io' title='Sitio Oficial' target='_blank'>Mauro Candia</a>",
+            "projects.descriptions.metroin": "MetroIN es una plataforma web desarrollada en ASP.NET Core con integración de TypeScript, Kendo UI y Telerik, orientada a la gestión operativa y documental de ubicaciones, clientes, unidades y asegurables dentro de un entorno empresarial.",
+            "projects.descriptions.apptrabajador": "APP trabajador te permite listar todas tus habilitaciones y generar el código QR único que te garantiza el acceso en todas las ubicaciones que tienes habilitadas. Además podrás visualizar tu perfil y gestionar los cambios sobre el mismo.",
+            "projects.descriptions.appgarita": "APP Garita te permite como guardia controlar los ingresos. Podrás visualizar los últimos movimientos y recibir las notificaciones. Forma parte de la plataforma de soluciones de MetroIN Argentina.",
+            "projects.descriptions.wabi": "Aplicación que te permite comprar tus tickets, promos y combos para diferentes eventos que se realizan en el establecimiento.",
+            "projects.descriptions.psg": "PSG es una plataforma web desarrollada en Angular con integración de TypeScript, orientada a la gestión operativa y documental de ubicaciones, clientes, unidades y asegurables dentro de un entorno empresarial.",
+            "projects.descriptions.massage": "Sitio Web responsivo que te permite gestionar tratamientos y turnos con el Rol de Admin o gestionar la creacion de turnos cumpliendo el Rol de Cliente.",
         },
         en: {
             "nav.home": "Home",
@@ -100,9 +106,16 @@ document.addEventListener('DOMContentLoaded', () => {
             "footer.supportHeading": "Support",
             "footer.getInTouchHeading": "Get in touch",
             "footer.copyrightText": "Copyright &copy; 2020-2024 | All rights reserved. Made with <span id='heart-icon'>&#10084;</span> by <a href='https://MauroCandia.github.io' title='Official Website' target='_blank'>Mauro Candia</a>",
+            "projects.descriptions.metroin": "MetroIN is a web platform developed in ASP.NET Core with TypeScript, Kendo UI, and Telerik integration, focused on the operational and documentary management of locations, clients, units, and insurees within an enterprise environment.",
+            "projects.descriptions.apptrabajador": "The Worker App allows you to list all your authorizations and generate the unique QR code that guarantees you access to all enabled locations. Additionally, you can view your profile and manage changes to it.",
+            "projects.descriptions.appgarita": "The Garita App allows you, as a guard, to control entries. You can view the latest movements and receive notifications. It is part of the MetroIN Argentina solutions platform.",
+            "projects.descriptions.wabi": "An application that allows you to buy your tickets, promotions, and combos for various events held at the venue.",
+            "projects.descriptions.psg": "PSG is a web platform developed in Angular with TypeScript integration, focused on the operational and documentary management of locations, clients, units, and insurees within an enterprise environment.",
+            "projects.descriptions.massage": "A responsive website that allows you to manage treatments and appointments with an Admin role or manage the creation of appointments with a Client role.",
         },
     };
 
+    window.translations = translations;
     const languageSelector = document.getElementById('language-selector');
 
     function setLanguage(lang) {
@@ -115,6 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         localStorage.setItem('lang', lang);
+        
+        // Dispara un evento personalizado para notificar a otros scripts
+        const event = new Event('languageChanged');
+        document.dispatchEvent(event);
     }
 
     const savedLang = localStorage.getItem('lang') || 'en';
