@@ -841,12 +841,11 @@ VanillaTilt.init(document.querySelector(".bio-img"), {
 });
 
 // Contact form status handling
-
-var form = document.getElementById("contact-form");
+var form = document.getElementById("contactForm");
 
 async function handleSubmit(event) {
   event.preventDefault();
-  var status = document.getElementById("status");
+  var status = document.getElementById("form-message"); // Corregido: el ID es form-message en tu HTML
   var data = new FormData(event.target);
   fetch(event.target.action, {
     method: form.method,
@@ -856,17 +855,18 @@ async function handleSubmit(event) {
     },
   })
     .then((response) => {
-      swal({
-        title: "Thank You!",
-        text: "Your message sent successfully. I'll get back to you soon!",
+      // Usar sweetalert2 para una mejor experiencia
+      Swal.fire({
+        title: "¡Gracias!",
+        text: "Tu mensaje fue enviado con éxito. ¡Te responderé pronto!",
         icon: "success",
       });
       form.reset();
     })
     .catch((error) => {
-      swal({
-        title: "Oops!",
-        text: "There was a problem with sending the message. Please refresh the page and try again later.",
+      Swal.fire({
+        title: "¡Oops!",
+        text: "Hubo un problema al enviar el mensaje. Por favor, refresca la página e inténtalo de nuevo más tarde.",
         icon: "error",
       });
       form.reset();
@@ -874,225 +874,238 @@ async function handleSubmit(event) {
 }
 form.addEventListener("submit", handleSubmit);
 
+// ... (tu código del formulario de contacto aquí) ...
+
 // projects section
 const projectData = [
   {
     title: "MetroIn UI",
-    thumbnail: "../img/profile_pic/MetroIN.jpeg",
+    thumbnail: "/img/profile_pic/MetroIN.jpeg",
     descriptionKey: "projects.descriptions.metroin",
     techStack: ["C#", "Asp.Net", "TypeScript", "JavaScript"],
     srcURL: "https://portal.metroin.ar",
   },
   {
     title: "APP Trabajador",
-    thumbnail: "../img/profile_pic/appTrabajador.jpeg",
+    thumbnail: "/img/profile_pic/appTrabajador.jpeg",
     descriptionKey: "projects.descriptions.apptrabajador",
     techStack: ["NET MAUI", "C#"],
     srcURL: "https://play.google.com/store/apps/details?id=ar.com.metroin.apptrabajador",
   },
   {
     title: "APP Garita",
-    thumbnail: "../img/profile_pic/appGarita.jpeg",
+    thumbnail: "/img/profile_pic/appGarita.jpeg",
     descriptionKey: "projects.descriptions.appgarita",
     techStack: ["NET MAUI", "C#"],
     srcURL: "https://play.google.com/store/apps/details?id=ar.com.metroin.appgarita",
   },
   {
     title: "Wabi Fun Club",
-    thumbnail: "../img/profile_pic/wabiApp.jpeg",
+    thumbnail: "/img/profile_pic/wabiApp.jpeg",
     descriptionKey: "projects.descriptions.wabi",
     techStack: ["NET MAUI", "MUI"],
     srcURL: "https://play.google.com/store/apps/details?id=app.quickpass.user.wabi&pcampaignid=web_share",
   },
   {
     title: "PSG UI",
-    thumbnail: "../img/profile_pic/psgWeb.jpeg",
+    thumbnail: "/img/profile_pic/psgWeb.jpeg",
     descriptionKey: "projects.descriptions.psg",
     techStack: ["C#", "Angular", "TypeScript", "JavaScript"],
     srcURL: "https://psg.web/",
   },
   {
     title: "Massage UI",
-    thumbnail: "../img/profile_pic/massageWeb.jpeg",
+    thumbnail: "/img/profile_pic/massageWeb.jpeg",
     descriptionKey: "projects.descriptions.massage",
     techStack: ["C#", "Angular", "TypeScript", "JavaScript"],
     srcURL: "https://massages-frontend.vercel.app",
   },
 ];
 
-// Re-render carousel when language changes
+function loadContent(projectData) {
+  const lang = localStorage.getItem('lang') || 'en';
+  const translations = window.translations;
+
+  // Si no se han cargado las traducciones, sal de la función.
+  if (!translations) {
+      console.error("Traducciones no cargadas. Intentando de nuevo en un momento...");
+      setTimeout(() => loadContent(projectData), 200);
+      return;
+  }
+
+  const buildTemplate = (template, data) => {
+    for (const key in data) {
+      const reg = new RegExp(`{${key}}`, "ig");
+      template = template.replace(reg, data[key]);
+    }
+    return template;
+  };
+
+  const ProjectCard = function (data) {
+    const techStackData = data.techStack
+      .map((tech) => `<span class="stack-badge">${tech}</span>`)
+      .join(" ");
+
+    const description = translations[lang] && translations[lang][data.descriptionKey]
+      ? translations[lang][data.descriptionKey]
+      : "Description not found.";
+
+    const demoText = translations[lang] && translations[lang]['btn.demo']
+      ? translations[lang]['btn.demo']
+      : "View Demo";
+
+    const elem = document.createElement("div");
+    elem.classList.add("project-card");
+    elem.style.setProperty("--rotation", data.rotation + "deg");
+    elem.innerHTML = buildTemplate(
+      `<div class='projects-header'>
+        <img class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" src="{thumbnail}" alt="Card image cap">
+      </div>
+      <h5 class="card-title mt-3">{title}</h5>
+      <div class='content'>${description}</div>
+      <div class='technologies'>Tech Stack: ${techStackData}</div>
+      <div class="card-buttons">
+        <a href="{srcURL}" target="_blank" class="card-btn" style="float: right; color: #fff; background-color: #68d372; padding: .375rem .75rem; border-radius: .25rem;"><i class="fa-solid fa-display"></i>${demoText}</a>
+      </div>`,
+      data
+    );
+
+    setTimeout(() => {
+      if (elem.children[2].scrollHeight > elem.children[2].clientHeight) {
+        elem.classList.add("truncated");
+      }
+    }, 100);
+    return elem;
+  };
+
+  const rotationAmt = 360 / projectData.length;
+  let focused = 0;
+  const projectsElem = document.querySelector(".project-data");
+  const navElem = document.querySelector(".navigation");
+
+  if (!projectsElem || !navElem) {
+    console.error("No se encontraron los elementos .project-data o .navigation en el DOM.");
+    return;
+  }
+
+  projectsElem.innerHTML = '';
+  navElem.innerHTML = '';
+
+  let paused = false;
+  projectsElem.addEventListener("mouseenter", () => {
+    paused = true;
+  });
+
+  projectsElem.addEventListener("mouseleave", () => (paused = false));
+
+  window.onblur = () => {
+    paused = true;
+  };
+  window.onfocus = () => {
+    paused = false;
+  };
+
+  function getFocusedIndex() {
+    return mod(focused, projectData.length);
+  }
+
+  const radius = 400 / (2 * Math.sin(Math.PI / projectData.length));
+  const distToEdge = Math.round(Math.sqrt(radius ** 2 - 200 ** 2) + 30);
+  projectsElem.style.setProperty("--distance", distToEdge + "px");
+
+  projectData.forEach((project, i) => {
+    projectsElem.appendChild(
+      ProjectCard({
+        ...project,
+        rotation: i * rotationAmt,
+      })
+    );
+    const navBtn = document.createElement("div");
+    navBtn.classList.add("nav-dot");
+    navBtn.addEventListener("click", () => {
+      select(i);
+    });
+    navElem.appendChild(navBtn);
+  });
+
+  let timeout;
+  function update() {
+    gsap.to(projectsElem, {
+      rotationY: -focused * rotationAmt,
+      duration: 1,
+    });
+    const { children } = projectsElem;
+    for (var i = 0; i < children.length; i++) {
+      if (getFocusedIndex() === i) {
+        children[i].classList.add("focused");
+        navElem.children[i].classList.add("focused");
+      } else {
+        children[i].classList.remove("focused");
+        navElem.children[i].classList.remove("focused");
+      }
+    }
+    if (timeout) clearTimeout(timeout);
+    const nextTimeout = (cb) => {
+      timeout = setTimeout(() => {
+        cb();
+      }, 5000);
+    };
+    nextTimeout(() => {
+      if (paused) {
+        update();
+      } else {
+        focused++;
+        update();
+      }
+    });
+  }
+  function mod(a, b) {
+    return ((a % b) + b) % b;
+  }
+  function diff(a, b, c, d) {
+    return d === -1 ? mod(b - a, c) : mod(a - b, c);
+  }
+  function select(index, dir) {
+    index = mod(index, projectData.length);
+    if (dir) {
+      focused += diff(index, getFocusedIndex(), projectData.length, dir) * dir;
+    } else {
+      focused += index - getFocusedIndex();
+    }
+    update();
+  }
+  update();
+
+  const arrowRight = document.querySelector(".arrow-right");
+  const arrowLeft = document.querySelector(".arrow-left");
+
+  if (arrowRight) {
+    arrowRight.addEventListener("click", () => {
+      focused++;
+      update();
+    });
+  }
+
+  if (arrowLeft) {
+    arrowLeft.addEventListener("click", () => {
+      focused--;
+      update();
+    });
+  }
+}
+
+// Escucha los eventos para cargar los proyectos.
+document.addEventListener('translationsLoaded', () => {
+    loadContent(projectData);
+});
 document.addEventListener('languageChanged', () => {
     loadContent(projectData);
 });
 
-function loadContent(projectData) {
-    const lang = localStorage.getItem('lang') || 'en';
-    const translations = window.translations;
-
-    const buildTemplate = (template, data) => {
-        for (const key in data) {
-            const reg = new RegExp(`{${key}}`, "ig");
-            template = template.replace(reg, data[key]);
-        }
-        return template;
-    };
-    const ProjectCard = function (data) {
-        const techStackData = data.techStack
-            .map((tech) => `<span class="stack-badge">${tech}</span>`)
-            .join(" ");
-
-        // Get the translated description
-        const description = translations[lang] && translations[lang][data.descriptionKey]
-            ? translations[lang][data.descriptionKey]
-            : "Description not found.";
-            
-        // Get translated button text
-        const demoText = translations[lang] && translations[lang]['btn.demo'] 
-            ? translations[lang]['btn.demo']
-            : "View Demo";
-
-        const elem = document.createElement("div");
-        elem.classList.add("project-card");
-        elem.style.setProperty("--rotation", data.rotation + "deg");
-        elem.innerHTML = buildTemplate(
-            `<div class='projects-header'>
-                <img class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" src={thumbnail} alt="Card image cap">
-            </div>
-            <h5 class="card-title mt-3">{title}</h5>
-            <div class='content'>${description}</div>
-            <div class='technologies'>Tech Stack: ${techStackData}</div>
-            <div class="card-buttons">
-                <a href="{srcURL}" target="_blank" class="card-btn" style="float: right; color: #fff; background-color: #68d372; padding: .375rem .75rem; border-radius: .25rem;"><i class="fa-solid fa-display"></i>${demoText}</a>
-            </div>`,
-            data
-        );
-
-        setTimeout(() => {
-            if (elem.children[2].scrollHeight > elem.children[2].clientHeight) {
-                elem.classList.add("truncated");
-            }
-        }, 100);
-        return elem;
-    };
-
-    const rotationAmt = 360 / projectData.length;
-    let focused = 0;
-    const projectsElem = document.querySelector(".project-data");
-    const navElem = document.querySelector(".navigation");
-
-    // Clear existing project cards and navigation dots to prevent duplication
-    projectsElem.innerHTML = '';
-    navElem.innerHTML = '';
-
-    let paused = false;
-    projectsElem.addEventListener("mouseenter", () => {
-        paused = true;
-    });
-
-    projectsElem.addEventListener("mouseleave", () => (paused = false));
-
-    window.onblur = () => {
-        paused = true;
-    };
-    window.onfocus = () => {
-        paused = false;
-    };
-
-    function getFocusedIndex() {
-        return mod(focused, projectData.length);
-    }
-
-    const radius = 400 / (2 * Math.sin(Math.PI / projectData.length));
-    const distToEdge = Math.round(Math.sqrt(radius ** 2 - 200 ** 2) + 30);
-    projectsElem.style.setProperty("--distance", distToEdge + "px");
-
-    projectData.forEach((project, i) => {
-        projectsElem.appendChild(
-            ProjectCard({
-                ...project,
-                rotation: i * rotationAmt,
-            })
-        );
-        const navBtn = document.createElement("div");
-        navBtn.classList.add("nav-dot");
-        navBtn.addEventListener("click", () => {
-            select(i);
-        });
-        navElem.appendChild(navBtn);
-    });
-
-    let timeout;
-    function update() {
-        gsap.to(projectsElem, {
-            rotationY: -focused * rotationAmt,
-            duration: 1,
-        });
-        const { children } = projectsElem;
-        for (var i = 0; i < children.length; i++) {
-            if (getFocusedIndex() === i) {
-                children[i].classList.add("focused");
-                navElem.children[i].classList.add("focused");
-            } else {
-                children[i].classList.remove("focused");
-                navElem.children[i].classList.remove("focused");
-            }
-        }
-        if (timeout) clearTimeout(timeout);
-        const nextTimeout = (cb) => {
-            timeout = setTimeout(() => {
-                cb();
-            }, 5000);
-        };
-        nextTimeout(() => {
-            if (paused) {
-                update();
-            } else {
-                focused++;
-                update();
-            }
-        });
-    }
-    function mod(a, b) {
-        return ((a % b) + b) % b;
-    }
-    function diff(a, b, c, d) {
-        return d === -1 ? mod(b - a, c) : mod(a - b, c);
-    }
-    function select(index, dir) {
-        index = mod(index, projectData.length);
-        if (dir) {
-            focused += diff(index, getFocusedIndex(), projectData.length, dir) * dir;
-        } else {
-            focused += index - getFocusedIndex();
-        }
-        update();
-    }
-    update();
-
-    document.querySelector(".arrow-right").addEventListener("click", () => {
-        focused++;
-        update();
-    });
-
-    document.querySelector(".arrow-left").addEventListener("click", () => {
-        focused--;
-        update();
-    });
-}
-
-// Initial call to load the projects on page load
-document.addEventListener("DOMContentLoaded", () => {
-    loadContent(projectData);
-});
-
-
 // Github data display
-
 async function getRepoList() {
   try {
-    const response = await fetch(
-      "https://github.com/maurocandia89"
-    );
+    const response = await fetch("https://api.github.com/users/maurocandia89/repos");
     const data = await response.json();
     return data;
   } catch (err) {
@@ -1100,9 +1113,7 @@ async function getRepoList() {
   }
 }
 
-// (async function() {
-//   const repoList = await getRepoList();
-//  for (let i = 1; i < repoList.length; i++) {
-// console.log(repoList[i].name);
-// }
-// })();
+(async function() {
+  const repoList = await getRepoList();
+  console.log(repoList);
+})();
