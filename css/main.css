@@ -1065,6 +1065,9 @@ h6 {
 .col3 .facebook {
   background-image: url("/img/icon/facebook.png");
 }
+.col3 .whatsapp {
+  background-image: url("/img/icon/whatsapp.png");
+}
 
 #intro .button {
   color: white;
