@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "milestones.sectionTitle": "Logros Especiales",
            "milestones.educationTitle3": "Técnico Industrial (2011-2016)",
             "milestones.educationSchool3": "Universidad de Mendoza",
-            "milestones.educationDescription3": "I studied and completed the course of the Industrial Engineering career over 6 years, obtaining the associate degree but not the bachelor's degree.",
+            "milestones.educationDescription3": "Estudié y completé el curso de la carrera de Ingeniería Industrial durante 6 años, obteniendo el título de asociado pero no el título de licenciado.",
             "milestones.educationTitle1": "University Technician in Software Development (2019-2021)",
             "milestones.educationTitle1": "Técnico Universitario en Desarrollo de Software (2019-2021)",
             "milestones.educationSchool1": "Universidad Tecnológica Nacional Facultad Regional Mendoza",
