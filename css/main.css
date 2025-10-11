@@ -701,9 +701,6 @@ h6 {
 
 /*Icons - Programming Languages & Frameworks */
 
-#skills .container .div-card .mongodb {
-  background-image: url("../img/icon/mongodb.png");
-}
 #skills .container .div-card .node-js {
   background-image: url("../img/icon/node-js.png");
 }
@@ -728,29 +725,26 @@ h6 {
 #skills .container .div-card .typescript {
   background-image: url("../img/icon/typescript.png");
 }
-#skills .container .div-card .react-js {
-  background-image: url("../img/icon/react-js.png");
-}
 #skills .container .div-card .c-sharp {
   background-image: url("../img/icon/c-sharp.png");
 }
 #skills .container .div-card .angular {
   background-image: url("../img/icon/angular.png");
 }
-#skills .container .div-card .vercel {
-  background-image: url("../img/icon/vercel.png");
+#skills .container .div-card .react-js {
+  background-image: url("../img/icon/react-js.png");
 }
 #skills .container .div-card .postgre {
   background-image: url("../img/icon/postgre.png");
+}
+#skills .container .div-card .vue {
+  background-image: url("../img/icon/vue.png");
 }
 
 /*Icons - Tools & Other Skills */
 
 #skills .container .div-card .git {
   background-image: url("../img/icon/git.png");
-}
-#skills .container .div-card .ux-ui {
-  background-image: url("../img/icon/ui-ux.png");
 }
 #skills .container .div-card .docker {
   background-image: url("../img/icon/docker.png");
