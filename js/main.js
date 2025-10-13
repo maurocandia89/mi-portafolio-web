@@ -920,6 +920,13 @@ const projectData = [
     techStack: ["C#", "Angular", "TypeScript", "JavaScript"],
     srcURL: "https://massages-frontend.vercel.app",
   },
+   {
+    title: "Pokédex",
+    thumbnail: "/img/profile_pic/pokédex_website.jpeg",
+    descriptionKey: "projects.descriptions.pokédex",
+    techStack: ["Vue", "JavaScript"],
+    srcURL: "https://global66-pokedex.vercel.app/",
+  },
 ];
 
 function loadContent(projectData) {
