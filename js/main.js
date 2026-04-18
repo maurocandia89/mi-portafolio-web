@@ -102,106 +102,106 @@ function progressIndicator() {
 })("undefined" != typeof self ? self : this, function () {
   return (() => {
     var e = {
-      75: function (e) {
-        (function () {
-          var t, n, r, o, a, s;
-          "undefined" != typeof performance &&
+        75: function (e) {
+          (function () {
+            var t, n, r, o, a, s;
+            "undefined" != typeof performance &&
             null !== performance &&
             performance.now
-            ? (e.exports = function () {
-              return performance.now();
-            })
-            : "undefined" != typeof process &&
-              null !== process &&
-              process.hrtime
-              ? ((e.exports = function () {
-                return (t() - a) / 1e6;
-              }),
-                (n = process.hrtime),
-                (o = (t = function () {
-                  var e;
-                  return 1e9 * (e = n())[0] + e[1];
-                })()),
-                (s = 1e9 * process.uptime()),
-                (a = o - s))
-              : Date.now
+              ? (e.exports = function () {
+                  return performance.now();
+                })
+              : "undefined" != typeof process &&
+                  null !== process &&
+                  process.hrtime
                 ? ((e.exports = function () {
-                  return Date.now() - r;
-                }),
-                  (r = Date.now()))
-                : ((e.exports = function () {
-                  return new Date().getTime() - r;
-                }),
-                  (r = new Date().getTime()));
-        }).call(this);
-      },
-      4087: (e, t, n) => {
-        for (
-          var r = n(75),
-          o = "undefined" == typeof window ? n.g : window,
-          a = ["moz", "webkit"],
-          s = "AnimationFrame",
-          i = o["request" + s],
-          u = o["cancel" + s] || o["cancelRequest" + s],
-          l = 0;
-          !i && l < a.length;
-          l++
-        )
-          (i = o[a[l] + "Request" + s]),
-            (u = o[a[l] + "Cancel" + s] || o[a[l] + "CancelRequest" + s]);
-        if (!i || !u) {
-          var c = 0,
-            p = 0,
-            d = [];
-          (i = function (e) {
-            if (0 === d.length) {
-              var t = r(),
-                n = Math.max(0, 16.666666666666668 - (t - c));
-              (c = n + t),
-                setTimeout(function () {
-                  var e = d.slice(0);
-                  d.length = 0;
-                  for (var t = 0; t < e.length; t++)
-                    if (!e[t].cancelled)
-                      try {
-                        e[t].callback(c);
-                      } catch (e) {
-                        setTimeout(function () {
-                          throw e;
-                        }, 0);
-                      }
-                }, Math.round(n));
-            }
-            return d.push({ handle: ++p, callback: e, cancelled: !1 }), p;
+                    return (t() - a) / 1e6;
+                  }),
+                  (n = process.hrtime),
+                  (o = (t = function () {
+                    var e;
+                    return 1e9 * (e = n())[0] + e[1];
+                  })()),
+                  (s = 1e9 * process.uptime()),
+                  (a = o - s))
+                : Date.now
+                  ? ((e.exports = function () {
+                      return Date.now() - r;
+                    }),
+                    (r = Date.now()))
+                  : ((e.exports = function () {
+                      return new Date().getTime() - r;
+                    }),
+                    (r = new Date().getTime()));
+          }).call(this);
+        },
+        4087: (e, t, n) => {
+          for (
+            var r = n(75),
+              o = "undefined" == typeof window ? n.g : window,
+              a = ["moz", "webkit"],
+              s = "AnimationFrame",
+              i = o["request" + s],
+              u = o["cancel" + s] || o["cancelRequest" + s],
+              l = 0;
+            !i && l < a.length;
+            l++
+          )
+            ((i = o[a[l] + "Request" + s]),
+              (u = o[a[l] + "Cancel" + s] || o[a[l] + "CancelRequest" + s]));
+          if (!i || !u) {
+            var c = 0,
+              p = 0,
+              d = [];
+            ((i = function (e) {
+              if (0 === d.length) {
+                var t = r(),
+                  n = Math.max(0, 16.666666666666668 - (t - c));
+                ((c = n + t),
+                  setTimeout(function () {
+                    var e = d.slice(0);
+                    d.length = 0;
+                    for (var t = 0; t < e.length; t++)
+                      if (!e[t].cancelled)
+                        try {
+                          e[t].callback(c);
+                        } catch (e) {
+                          setTimeout(function () {
+                            throw e;
+                          }, 0);
+                        }
+                  }, Math.round(n)));
+              }
+              return (d.push({ handle: ++p, callback: e, cancelled: !1 }), p);
+            }),
+              (u = function (e) {
+                for (var t = 0; t < d.length; t++)
+                  d[t].handle === e && (d[t].cancelled = !0);
+              }));
+          }
+          ((e.exports = function (e) {
+            return i.call(o, e);
           }),
-            (u = function (e) {
-              for (var t = 0; t < d.length; t++)
-                d[t].handle === e && (d[t].cancelled = !0);
-            });
-        }
-        (e.exports = function (e) {
-          return i.call(o, e);
-        }),
-          (e.exports.cancel = function () {
-            u.apply(o, arguments);
-          }),
-          (e.exports.polyfill = function (e) {
-            e || (e = o),
-              (e.requestAnimationFrame = i),
-              (e.cancelAnimationFrame = u);
-          });
+            (e.exports.cancel = function () {
+              u.apply(o, arguments);
+            }),
+            (e.exports.polyfill = function (e) {
+              (e || (e = o),
+                (e.requestAnimationFrame = i),
+                (e.cancelAnimationFrame = u));
+            }));
+        },
       },
-    },
       t = {};
     function n(r) {
       var o = t[r];
       if (void 0 !== o) return o.exports;
       var a = (t[r] = { exports: {} });
-      return e[r].call(a.exports, a, a.exports, n), a.exports;
+      return (e[r].call(a.exports, a, a.exports, n), a.exports);
     }
-    (n.n = (e) => {
+    ((n.n = (e) => {
       var t = e && e.__esModule ? () => e.default : () => e;
-      return n.d(t, { a: t }), t;
+      return (n.d(t, { a: t }), t);
     }),
       (n.d = (e, t) => {
         for (var r in t)
@@ -217,7 +217,7 @@ function progressIndicator() {
           if ("object" == typeof window) return window;
         }
       })()),
-      (n.o = (e, t) => Object.prototype.hasOwnProperty.call(e, t));
+      (n.o = (e, t) => Object.prototype.hasOwnProperty.call(e, t)));
     var r = {};
     return (
       (() => {
@@ -226,11 +226,11 @@ function progressIndicator() {
         var e = n(4087),
           t = n.n(e);
         const o = function (e) {
-          return new RegExp(/<[a-z][\s\S]*>/i).test(e);
-        },
+            return new RegExp(/<[a-z][\s\S]*>/i).test(e);
+          },
           a = function (e) {
             var t = document.createElement("div");
-            return (t.innerHTML = e), t.childNodes;
+            return ((t.innerHTML = e), t.childNodes);
           },
           s = function (e, t) {
             return Math.floor(Math.random() * (t - e + 1)) + e;
@@ -251,11 +251,11 @@ function progressIndicator() {
           var n = Object.keys(e);
           if (Object.getOwnPropertySymbols) {
             var r = Object.getOwnPropertySymbols(e);
-            t &&
+            (t &&
               (r = r.filter(function (t) {
                 return Object.getOwnPropertyDescriptor(e, t).enumerable;
               })),
-              n.push.apply(n, r);
+              n.push.apply(n, r));
           }
           return n;
         }
@@ -264,17 +264,20 @@ function progressIndicator() {
             var n = null != arguments[t] ? arguments[t] : {};
             t % 2
               ? E(Object(n), !0).forEach(function (t) {
-                N(e, t, n[t]);
-              })
+                  N(e, t, n[t]);
+                })
               : Object.getOwnPropertyDescriptors
-                ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n))
-                : E(Object(n)).forEach(function (t) {
-                  Object.defineProperty(
+                ? Object.defineProperties(
                     e,
-                    t,
-                    Object.getOwnPropertyDescriptor(n, t)
-                  );
-                });
+                    Object.getOwnPropertyDescriptors(n),
+                  )
+                : E(Object(n)).forEach(function (t) {
+                    Object.defineProperty(
+                      e,
+                      t,
+                      Object.getOwnPropertyDescriptor(n, t),
+                    );
+                  });
           }
           return e;
         }
@@ -299,7 +302,7 @@ function progressIndicator() {
                   "Map" === n || "Set" === n
                     ? Array.from(e)
                     : "Arguments" === n ||
-                      /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
+                        /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
                       ? b(e, t)
                       : void 0
                 );
@@ -307,7 +310,7 @@ function progressIndicator() {
             })(e) ||
             (function () {
               throw new TypeError(
-                "Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+                "Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.",
               );
             })()
           );
@@ -320,21 +323,21 @@ function progressIndicator() {
         function A(e, t) {
           for (var n = 0; n < t.length; n++) {
             var r = t[n];
-            (r.enumerable = r.enumerable || !1),
+            ((r.enumerable = r.enumerable || !1),
               (r.configurable = !0),
               "value" in r && (r.writable = !0),
-              Object.defineProperty(e, r.key, r);
+              Object.defineProperty(e, r.key, r));
           }
         }
         function N(e, t, n) {
           return (
             t in e
               ? Object.defineProperty(e, t, {
-                value: n,
-                enumerable: !0,
-                configurable: !0,
-                writable: !0,
-              })
+                  value: n,
+                  enumerable: !0,
+                  configurable: !0,
+                  writable: !0,
+                })
               : (e[t] = n),
             e
           );
@@ -347,385 +350,385 @@ function progressIndicator() {
                 if (!(e instanceof t))
                   throw new TypeError("Cannot call a class as a function");
               })(this, n),
-                N(this, "state", {
-                  cursorAnimation: null,
-                  lastFrameTime: null,
-                  pauseUntil: null,
-                  eventQueue: [],
-                  eventLoop: null,
-                  eventLoopPaused: !1,
-                  reverseCalledEvents: [],
-                  calledEvents: [],
-                  visibleNodes: [],
-                  initialOptions: null,
-                  elements: {
-                    container: null,
-                    wrapper: document.createElement("span"),
-                    cursor: document.createElement("span"),
-                  },
-                }),
-                N(this, "options", {
-                  strings: null,
-                  cursor: "|",
-                  delay: "natural",
-                  pauseFor: 1500,
-                  deleteSpeed: "natural",
-                  loop: !1,
-                  autoStart: !1,
-                  devMode: !1,
-                  skipAddStyles: !1,
-                  wrapperClassName: "Typewriter__wrapper",
-                  cursorClassName: "Typewriter__cursor",
-                  stringSplitter: null,
-                  onCreateTextNode: null,
-                  onRemoveNode: null,
-                }),
-                N(this, "setupWrapperElement", function () {
-                  b.state.elements.container &&
-                    ((b.state.elements.wrapper.className =
-                      b.options.wrapperClassName),
-                      (b.state.elements.cursor.className =
-                        b.options.cursorClassName),
-                      (b.state.elements.cursor.innerHTML = b.options.cursor),
-                      (b.state.elements.container.innerHTML = ""),
-                      b.state.elements.container.appendChild(
-                        b.state.elements.wrapper
-                      ),
-                      b.state.elements.container.appendChild(
-                        b.state.elements.cursor
-                      ));
-                }),
-                N(this, "start", function () {
-                  return (b.state.eventLoopPaused = !1), b.runEventLoop(), b;
-                }),
-                N(this, "pause", function () {
-                  return (b.state.eventLoopPaused = !0), b;
-                }),
-                N(this, "stop", function () {
-                  return (
-                    b.state.eventLoop &&
+              N(this, "state", {
+                cursorAnimation: null,
+                lastFrameTime: null,
+                pauseUntil: null,
+                eventQueue: [],
+                eventLoop: null,
+                eventLoopPaused: !1,
+                reverseCalledEvents: [],
+                calledEvents: [],
+                visibleNodes: [],
+                initialOptions: null,
+                elements: {
+                  container: null,
+                  wrapper: document.createElement("span"),
+                  cursor: document.createElement("span"),
+                },
+              }),
+              N(this, "options", {
+                strings: null,
+                cursor: "|",
+                delay: "natural",
+                pauseFor: 1500,
+                deleteSpeed: "natural",
+                loop: !1,
+                autoStart: !1,
+                devMode: !1,
+                skipAddStyles: !1,
+                wrapperClassName: "Typewriter__wrapper",
+                cursorClassName: "Typewriter__cursor",
+                stringSplitter: null,
+                onCreateTextNode: null,
+                onRemoveNode: null,
+              }),
+              N(this, "setupWrapperElement", function () {
+                b.state.elements.container &&
+                  ((b.state.elements.wrapper.className =
+                    b.options.wrapperClassName),
+                  (b.state.elements.cursor.className =
+                    b.options.cursorClassName),
+                  (b.state.elements.cursor.innerHTML = b.options.cursor),
+                  (b.state.elements.container.innerHTML = ""),
+                  b.state.elements.container.appendChild(
+                    b.state.elements.wrapper,
+                  ),
+                  b.state.elements.container.appendChild(
+                    b.state.elements.cursor,
+                  ));
+              }),
+              N(this, "start", function () {
+                return ((b.state.eventLoopPaused = !1), b.runEventLoop(), b);
+              }),
+              N(this, "pause", function () {
+                return ((b.state.eventLoopPaused = !0), b);
+              }),
+              N(this, "stop", function () {
+                return (
+                  b.state.eventLoop &&
                     ((0, e.cancel)(b.state.eventLoop),
-                      (b.state.eventLoop = null)),
-                    b
-                  );
-                }),
-                N(this, "pauseFor", function (e) {
-                  return b.addEventToQueue(p, { ms: e }), b;
-                }),
-                N(this, "typeOutAllStrings", function () {
-                  return "string" == typeof b.options.strings
-                    ? (b
+                    (b.state.eventLoop = null)),
+                  b
+                );
+              }),
+              N(this, "pauseFor", function (e) {
+                return (b.addEventToQueue(p, { ms: e }), b);
+              }),
+              N(this, "typeOutAllStrings", function () {
+                return "string" == typeof b.options.strings
+                  ? (b
                       .typeString(b.options.strings)
                       .pauseFor(b.options.pauseFor),
-                      b)
-                    : (b.options.strings.forEach(function (e) {
+                    b)
+                  : (b.options.strings.forEach(function (e) {
                       b.typeString(e)
                         .pauseFor(b.options.pauseFor)
                         .deleteAll(b.options.deleteSpeed);
                     }),
-                      b);
-                }),
-                N(this, "typeString", function (e) {
-                  var t =
-                    arguments.length > 1 && void 0 !== arguments[1]
-                      ? arguments[1]
-                      : null;
-                  if (o(e)) return b.typeOutHTMLString(e, t);
-                  if (e) {
-                    var n = b.options || {},
-                      r = n.stringSplitter,
-                      a = "function" == typeof r ? r(e) : e.split("");
-                    b.typeCharacters(a, t);
-                  }
-                  return b;
-                }),
-                N(this, "pasteString", function (e) {
-                  var t =
-                    arguments.length > 1 && void 0 !== arguments[1]
-                      ? arguments[1]
-                      : null;
-                  return o(e)
-                    ? b.typeOutHTMLString(e, t, !0)
-                    : (e && b.addEventToQueue(y, { character: e, node: t }), b);
-                }),
-                N(this, "typeOutHTMLString", function (e) {
-                  var t =
+                    b);
+              }),
+              N(this, "typeString", function (e) {
+                var t =
+                  arguments.length > 1 && void 0 !== arguments[1]
+                    ? arguments[1]
+                    : null;
+                if (o(e)) return b.typeOutHTMLString(e, t);
+                if (e) {
+                  var n = b.options || {},
+                    r = n.stringSplitter,
+                    a = "function" == typeof r ? r(e) : e.split("");
+                  b.typeCharacters(a, t);
+                }
+                return b;
+              }),
+              N(this, "pasteString", function (e) {
+                var t =
+                  arguments.length > 1 && void 0 !== arguments[1]
+                    ? arguments[1]
+                    : null;
+                return o(e)
+                  ? b.typeOutHTMLString(e, t, !0)
+                  : (e && b.addEventToQueue(y, { character: e, node: t }), b);
+              }),
+              N(this, "typeOutHTMLString", function (e) {
+                var t =
                     arguments.length > 1 && void 0 !== arguments[1]
                       ? arguments[1]
                       : null,
-                    n = arguments.length > 2 ? arguments[2] : void 0,
-                    r = a(e);
-                  if (r.length > 0)
-                    for (var o = 0; o < r.length; o++) {
-                      var s = r[o],
-                        i = s.innerHTML;
-                      s && 3 !== s.nodeType
-                        ? ((s.innerHTML = ""),
-                          b.addEventToQueue(f, { node: s, parentNode: t }),
-                          n ? b.pasteString(i, s) : b.typeString(i, s))
-                        : s.textContent &&
+                  n = arguments.length > 2 ? arguments[2] : void 0,
+                  r = a(e);
+                if (r.length > 0)
+                  for (var o = 0; o < r.length; o++) {
+                    var s = r[o],
+                      i = s.innerHTML;
+                    s && 3 !== s.nodeType
+                      ? ((s.innerHTML = ""),
+                        b.addEventToQueue(f, { node: s, parentNode: t }),
+                        n ? b.pasteString(i, s) : b.typeString(i, s))
+                      : s.textContent &&
                         (n
                           ? b.pasteString(s.textContent, t)
                           : b.typeString(s.textContent, t));
-                    }
-                  return b;
-                }),
-                N(this, "deleteAll", function () {
-                  var e =
-                    arguments.length > 0 && void 0 !== arguments[0]
-                      ? arguments[0]
-                      : "natural";
-                  return b.addEventToQueue(l, { speed: e }), b;
-                }),
-                N(this, "changeDeleteSpeed", function (e) {
-                  if (!e) throw new Error("Must provide new delete speed");
-                  return b.addEventToQueue(v, { speed: e }), b;
-                }),
-                N(this, "changeDelay", function (e) {
-                  if (!e) throw new Error("Must provide new delay");
-                  return b.addEventToQueue(h, { delay: e }), b;
-                }),
-                N(this, "changeCursor", function (e) {
-                  if (!e) throw new Error("Must provide new cursor");
-                  return b.addEventToQueue(m, { cursor: e }), b;
-                }),
-                N(this, "deleteChars", function (e) {
-                  if (!e)
-                    throw new Error(
-                      "Must provide amount of characters to delete"
-                    );
-                  for (var t = 0; t < e; t++) b.addEventToQueue(u);
-                  return b;
-                }),
-                N(this, "callFunction", function (e, t) {
-                  if (!e || "function" != typeof e)
-                    throw new Error("Callbak must be a function");
-                  return b.addEventToQueue(d, { cb: e, thisArg: t }), b;
-                }),
-                N(this, "typeCharacters", function (e) {
-                  var t =
-                    arguments.length > 1 && void 0 !== arguments[1]
-                      ? arguments[1]
-                      : null;
-                  if (!e || !Array.isArray(e))
-                    throw new Error("Characters must be an array");
-                  return (
-                    e.forEach(function (e) {
-                      b.addEventToQueue(i, { character: e, node: t });
-                    }),
-                    b
-                  );
-                }),
-                N(this, "removeCharacters", function (e) {
-                  if (!e || !Array.isArray(e))
-                    throw new Error("Characters must be an array");
-                  return (
-                    e.forEach(function () {
-                      b.addEventToQueue(u);
-                    }),
-                    b
-                  );
-                }),
-                N(this, "addEventToQueue", function (e, t) {
-                  var n =
-                    arguments.length > 2 &&
-                    void 0 !== arguments[2] &&
-                    arguments[2];
-                  return b.addEventToStateProperty(e, t, n, "eventQueue");
-                }),
-                N(this, "addReverseCalledEvent", function (e, t) {
-                  var n =
-                    arguments.length > 2 &&
-                    void 0 !== arguments[2] &&
-                    arguments[2],
-                    r = b.options.loop;
-                  return r
-                    ? b.addEventToStateProperty(e, t, n, "reverseCalledEvents")
-                    : b;
-                }),
-                N(this, "addEventToStateProperty", function (e, t) {
-                  var n =
-                    arguments.length > 2 &&
-                    void 0 !== arguments[2] &&
-                    arguments[2],
-                    r = arguments.length > 3 ? arguments[3] : void 0,
-                    o = { eventName: e, eventArgs: t || {} };
-                  return (
-                    (b.state[r] = n
-                      ? [o].concat(T(b.state[r]))
-                      : [].concat(T(b.state[r]), [o])),
-                    b
-                  );
-                }),
-                N(this, "runEventLoop", function () {
-                  b.state.lastFrameTime || (b.state.lastFrameTime = Date.now());
-                  var e = Date.now(),
-                    n = e - b.state.lastFrameTime;
-                  if (!b.state.eventQueue.length) {
-                    if (!b.options.loop) return;
-                    (b.state.eventQueue = T(b.state.calledEvents)),
-                      (b.state.calledEvents = []),
-                      (b.options = w({}, b.state.initialOptions));
                   }
+                return b;
+              }),
+              N(this, "deleteAll", function () {
+                var e =
+                  arguments.length > 0 && void 0 !== arguments[0]
+                    ? arguments[0]
+                    : "natural";
+                return (b.addEventToQueue(l, { speed: e }), b);
+              }),
+              N(this, "changeDeleteSpeed", function (e) {
+                if (!e) throw new Error("Must provide new delete speed");
+                return (b.addEventToQueue(v, { speed: e }), b);
+              }),
+              N(this, "changeDelay", function (e) {
+                if (!e) throw new Error("Must provide new delay");
+                return (b.addEventToQueue(h, { delay: e }), b);
+              }),
+              N(this, "changeCursor", function (e) {
+                if (!e) throw new Error("Must provide new cursor");
+                return (b.addEventToQueue(m, { cursor: e }), b);
+              }),
+              N(this, "deleteChars", function (e) {
+                if (!e)
+                  throw new Error(
+                    "Must provide amount of characters to delete",
+                  );
+                for (var t = 0; t < e; t++) b.addEventToQueue(u);
+                return b;
+              }),
+              N(this, "callFunction", function (e, t) {
+                if (!e || "function" != typeof e)
+                  throw new Error("Callbak must be a function");
+                return (b.addEventToQueue(d, { cb: e, thisArg: t }), b);
+              }),
+              N(this, "typeCharacters", function (e) {
+                var t =
+                  arguments.length > 1 && void 0 !== arguments[1]
+                    ? arguments[1]
+                    : null;
+                if (!e || !Array.isArray(e))
+                  throw new Error("Characters must be an array");
+                return (
+                  e.forEach(function (e) {
+                    b.addEventToQueue(i, { character: e, node: t });
+                  }),
+                  b
+                );
+              }),
+              N(this, "removeCharacters", function (e) {
+                if (!e || !Array.isArray(e))
+                  throw new Error("Characters must be an array");
+                return (
+                  e.forEach(function () {
+                    b.addEventToQueue(u);
+                  }),
+                  b
+                );
+              }),
+              N(this, "addEventToQueue", function (e, t) {
+                var n =
+                  arguments.length > 2 &&
+                  void 0 !== arguments[2] &&
+                  arguments[2];
+                return b.addEventToStateProperty(e, t, n, "eventQueue");
+              }),
+              N(this, "addReverseCalledEvent", function (e, t) {
+                var n =
+                    arguments.length > 2 &&
+                    void 0 !== arguments[2] &&
+                    arguments[2],
+                  r = b.options.loop;
+                return r
+                  ? b.addEventToStateProperty(e, t, n, "reverseCalledEvents")
+                  : b;
+              }),
+              N(this, "addEventToStateProperty", function (e, t) {
+                var n =
+                    arguments.length > 2 &&
+                    void 0 !== arguments[2] &&
+                    arguments[2],
+                  r = arguments.length > 3 ? arguments[3] : void 0,
+                  o = { eventName: e, eventArgs: t || {} };
+                return (
+                  (b.state[r] = n
+                    ? [o].concat(T(b.state[r]))
+                    : [].concat(T(b.state[r]), [o])),
+                  b
+                );
+              }),
+              N(this, "runEventLoop", function () {
+                b.state.lastFrameTime || (b.state.lastFrameTime = Date.now());
+                var e = Date.now(),
+                  n = e - b.state.lastFrameTime;
+                if (!b.state.eventQueue.length) {
+                  if (!b.options.loop) return;
+                  ((b.state.eventQueue = T(b.state.calledEvents)),
+                    (b.state.calledEvents = []),
+                    (b.options = w({}, b.state.initialOptions)));
+                }
+                if (
+                  ((b.state.eventLoop = t()(b.runEventLoop)),
+                  !b.state.eventLoopPaused)
+                ) {
+                  if (b.state.pauseUntil) {
+                    if (e < b.state.pauseUntil) return;
+                    b.state.pauseUntil = null;
+                  }
+                  var r,
+                    o = T(b.state.eventQueue),
+                    a = o.shift();
                   if (
-                    ((b.state.eventLoop = t()(b.runEventLoop)),
-                      !b.state.eventLoopPaused)
+                    !(
+                      n <=
+                      (r =
+                        a.eventName === c || a.eventName === u
+                          ? "natural" === b.options.deleteSpeed
+                            ? s(40, 80)
+                            : b.options.deleteSpeed
+                          : "natural" === b.options.delay
+                            ? s(120, 160)
+                            : b.options.delay)
+                    )
                   ) {
-                    if (b.state.pauseUntil) {
-                      if (e < b.state.pauseUntil) return;
-                      b.state.pauseUntil = null;
-                    }
-                    var r,
-                      o = T(b.state.eventQueue),
-                      a = o.shift();
-                    if (
-                      !(
-                        n <=
-                        (r =
-                          a.eventName === c || a.eventName === u
-                            ? "natural" === b.options.deleteSpeed
-                              ? s(40, 80)
-                              : b.options.deleteSpeed
-                            : "natural" === b.options.delay
-                              ? s(120, 160)
-                              : b.options.delay)
-                      )
-                    ) {
-                      var E = a.eventName,
-                        A = a.eventArgs;
-                      switch (
+                    var E = a.eventName,
+                      A = a.eventArgs;
+                    switch (
                       (b.logInDevMode({
                         currentEvent: a,
                         state: b.state,
                         delay: r,
                       }),
-                        E)
-                      ) {
-                        case y:
-                        case i:
-                          var N = A.character,
-                            S = A.node,
-                            C = document.createTextNode(N),
-                            _ = C;
-                          b.options.onCreateTextNode &&
-                            "function" == typeof b.options.onCreateTextNode &&
-                            (_ = b.options.onCreateTextNode(N, C)),
-                            _ &&
+                      E)
+                    ) {
+                      case y:
+                      case i:
+                        var N = A.character,
+                          S = A.node,
+                          C = document.createTextNode(N),
+                          _ = C;
+                        (b.options.onCreateTextNode &&
+                          "function" == typeof b.options.onCreateTextNode &&
+                          (_ = b.options.onCreateTextNode(N, C)),
+                          _ &&
                             (S
                               ? S.appendChild(_)
                               : b.state.elements.wrapper.appendChild(_)),
-                            (b.state.visibleNodes = [].concat(
-                              T(b.state.visibleNodes),
-                              [{ type: "TEXT_NODE", character: N, node: _ }]
-                            ));
-                          break;
-                        case u:
-                          o.unshift({
-                            eventName: c,
-                            eventArgs: { removingCharacterNode: !0 },
-                          });
-                          break;
-                        case p:
-                          var O = a.eventArgs.ms;
-                          b.state.pauseUntil = Date.now() + parseInt(O);
-                          break;
-                        case d:
-                          var L = a.eventArgs,
-                            D = L.cb,
-                            M = L.thisArg;
-                          D.call(M, { elements: b.state.elements });
-                          break;
-                        case f:
-                          var x = a.eventArgs,
-                            P = x.node,
-                            R = x.parentNode;
-                          R
-                            ? R.appendChild(P)
-                            : b.state.elements.wrapper.appendChild(P),
-                            (b.state.visibleNodes = [].concat(
-                              T(b.state.visibleNodes),
-                              [
-                                {
-                                  type: g,
-                                  node: P,
-                                  parentNode: R || b.state.elements.wrapper,
-                                },
-                              ]
-                            ));
-                          break;
-                        case l:
-                          var j = b.state.visibleNodes,
-                            k = A.speed,
-                            Q = [];
-                          k &&
-                            Q.push({
-                              eventName: v,
-                              eventArgs: { speed: k, temp: !0 },
-                            });
-                          for (var F = 0, H = j.length; F < H; F++)
-                            Q.push({
-                              eventName: c,
-                              eventArgs: { removingCharacterNode: !1 },
-                            });
-                          k &&
-                            Q.push({
-                              eventName: v,
-                              eventArgs: {
-                                speed: b.options.deleteSpeed,
-                                temp: !0,
+                          (b.state.visibleNodes = [].concat(
+                            T(b.state.visibleNodes),
+                            [{ type: "TEXT_NODE", character: N, node: _ }],
+                          )));
+                        break;
+                      case u:
+                        o.unshift({
+                          eventName: c,
+                          eventArgs: { removingCharacterNode: !0 },
+                        });
+                        break;
+                      case p:
+                        var O = a.eventArgs.ms;
+                        b.state.pauseUntil = Date.now() + parseInt(O);
+                        break;
+                      case d:
+                        var L = a.eventArgs,
+                          D = L.cb,
+                          M = L.thisArg;
+                        D.call(M, { elements: b.state.elements });
+                        break;
+                      case f:
+                        var x = a.eventArgs,
+                          P = x.node,
+                          R = x.parentNode;
+                        (R
+                          ? R.appendChild(P)
+                          : b.state.elements.wrapper.appendChild(P),
+                          (b.state.visibleNodes = [].concat(
+                            T(b.state.visibleNodes),
+                            [
+                              {
+                                type: g,
+                                node: P,
+                                parentNode: R || b.state.elements.wrapper,
                               },
-                            }),
-                            o.unshift.apply(o, Q);
-                          break;
-                        case c:
-                          var I = a.eventArgs.removingCharacterNode;
-                          if (b.state.visibleNodes.length) {
-                            var U = b.state.visibleNodes.pop(),
-                              q = U.type,
-                              G = U.node,
-                              Y = U.character;
-                            b.options.onRemoveNode &&
-                              "function" == typeof b.options.onRemoveNode &&
-                              b.options.onRemoveNode({ node: G, character: Y }),
-                              G && G.parentNode.removeChild(G),
-                              q === g &&
+                            ],
+                          )));
+                        break;
+                      case l:
+                        var j = b.state.visibleNodes,
+                          k = A.speed,
+                          Q = [];
+                        k &&
+                          Q.push({
+                            eventName: v,
+                            eventArgs: { speed: k, temp: !0 },
+                          });
+                        for (var F = 0, H = j.length; F < H; F++)
+                          Q.push({
+                            eventName: c,
+                            eventArgs: { removingCharacterNode: !1 },
+                          });
+                        (k &&
+                          Q.push({
+                            eventName: v,
+                            eventArgs: {
+                              speed: b.options.deleteSpeed,
+                              temp: !0,
+                            },
+                          }),
+                          o.unshift.apply(o, Q));
+                        break;
+                      case c:
+                        var I = a.eventArgs.removingCharacterNode;
+                        if (b.state.visibleNodes.length) {
+                          var U = b.state.visibleNodes.pop(),
+                            q = U.type,
+                            G = U.node,
+                            Y = U.character;
+                          (b.options.onRemoveNode &&
+                            "function" == typeof b.options.onRemoveNode &&
+                            b.options.onRemoveNode({ node: G, character: Y }),
+                            G && G.parentNode.removeChild(G),
+                            q === g &&
                               I &&
-                              o.unshift({ eventName: c, eventArgs: {} });
-                          }
-                          break;
-                        case v:
-                          b.options.deleteSpeed = a.eventArgs.speed;
-                          break;
-                        case h:
-                          b.options.delay = a.eventArgs.delay;
-                          break;
-                        case m:
-                          (b.options.cursor = a.eventArgs.cursor),
-                            (b.state.elements.cursor.innerHTML =
-                              a.eventArgs.cursor);
-                      }
-                      b.options.loop &&
-                        (a.eventName === c ||
-                          (a.eventArgs && a.eventArgs.temp) ||
-                          (b.state.calledEvents = [].concat(
-                            T(b.state.calledEvents),
-                            [a]
-                          ))),
-                        (b.state.eventQueue = o),
-                        (b.state.lastFrameTime = e);
+                              o.unshift({ eventName: c, eventArgs: {} }));
+                        }
+                        break;
+                      case v:
+                        b.options.deleteSpeed = a.eventArgs.speed;
+                        break;
+                      case h:
+                        b.options.delay = a.eventArgs.delay;
+                        break;
+                      case m:
+                        ((b.options.cursor = a.eventArgs.cursor),
+                          (b.state.elements.cursor.innerHTML =
+                            a.eventArgs.cursor));
                     }
+                    (b.options.loop &&
+                      (a.eventName === c ||
+                        (a.eventArgs && a.eventArgs.temp) ||
+                        (b.state.calledEvents = [].concat(
+                          T(b.state.calledEvents),
+                          [a],
+                        ))),
+                      (b.state.eventQueue = o),
+                      (b.state.lastFrameTime = e));
                   }
-                }),
-                r)
+                }
+              }),
+              r)
             )
               if ("string" == typeof r) {
                 var A = document.querySelector(r);
                 if (!A) throw new Error("Could not find container element");
                 this.state.elements.container = A;
               } else this.state.elements.container = r;
-            E && (this.options = w(w({}, this.options), E)),
+            (E && (this.options = w(w({}, this.options), E)),
               (this.state.initialOptions = w({}, this.options)),
-              this.init();
+              this.init());
           }
           var r, E;
           return (
@@ -735,26 +738,26 @@ function progressIndicator() {
                 key: "init",
                 value: function () {
                   var e, t;
-                  this.setupWrapperElement(),
+                  (this.setupWrapperElement(),
                     this.addEventToQueue(
                       m,
                       { cursor: this.options.cursor },
-                      !0
+                      !0,
                     ),
                     this.addEventToQueue(l, null, !0),
                     !window ||
-                    window.___TYPEWRITER_JS_STYLES_ADDED___ ||
-                    this.options.skipAddStyles ||
-                    ((e =
-                      ".Typewriter__cursor{-webkit-animation:Typewriter-cursor 1s infinite;animation:Typewriter-cursor 1s infinite;margin-left:1px}@-webkit-keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}@keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}"),
+                      window.___TYPEWRITER_JS_STYLES_ADDED___ ||
+                      this.options.skipAddStyles ||
+                      ((e =
+                        ".Typewriter__cursor{-webkit-animation:Typewriter-cursor 1s infinite;animation:Typewriter-cursor 1s infinite;margin-left:1px}@-webkit-keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}@keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}"),
                       (t = document.createElement("style")).appendChild(
-                        document.createTextNode(e)
+                        document.createTextNode(e),
                       ),
                       document.head.appendChild(t),
                       (window.___TYPEWRITER_JS_STYLES_ADDED___ = !0)),
                     !0 === this.options.autoStart &&
-                    this.options.strings &&
-                    this.typeOutAllStrings().start();
+                      this.options.strings &&
+                      this.typeOutAllStrings().start());
                 },
               },
               {
@@ -779,7 +782,8 @@ function progressIndicator() {
 setTimeout(() => {
   new Typewriter(".typing-text", {
     strings: [
-      "Full-Stack Developer",
+      "Data Engineer",
+      "Backend & Cloud Developer",
     ],
     autoStart: true,
     loop: true,
@@ -883,28 +887,31 @@ const projectData = [
     thumbnail: "/img/profile_pic/MetroIN.jpeg",
     descriptionKey: "projects.descriptions.metroin",
     techStack: ["C#", "Asp.Net", "TypeScript", "JavaScript"],
-    srcURL: "https://portal.metroin.ar",
+    srcURL: "https://metroin.com.ar/",
   },
   {
     title: "APP Trabajador",
     thumbnail: "/img/profile_pic/appTrabajador.jpeg",
     descriptionKey: "projects.descriptions.apptrabajador",
     techStack: ["NET MAUI", "C#"],
-    srcURL: "https://play.google.com/store/apps/details?id=ar.com.metroin.apptrabajador",
+    srcURL:
+      "https://play.google.com/store/apps/details?id=ar.com.metroin.apptrabajador",
   },
   {
     title: "APP Garita",
     thumbnail: "/img/profile_pic/appGarita.jpeg",
     descriptionKey: "projects.descriptions.appgarita",
     techStack: ["NET MAUI", "C#"],
-    srcURL: "https://play.google.com/store/apps/details?id=ar.com.metroin.appgarita",
+    srcURL:
+      "https://play.google.com/store/apps/details?id=ar.com.metroin.appgarita",
   },
   {
     title: "Wabi Fun Club",
     thumbnail: "/img/profile_pic/wabiApp.jpeg",
     descriptionKey: "projects.descriptions.wabi",
     techStack: ["KMM"],
-    srcURL: "https://play.google.com/store/apps/details?id=app.quickpass.user.wabi&pcampaignid=web_share",
+    srcURL:
+      "https://play.google.com/store/apps/details?id=app.quickpass.user.wabi&pcampaignid=web_share",
   },
   {
     title: "PSG UI",
@@ -913,31 +920,47 @@ const projectData = [
     techStack: ["C#", "Angular", "TypeScript", "JavaScript"],
     srcURL: "https://psg.web/",
   },
-  {
-    title: "Massage UI",
-    thumbnail: "/img/profile_pic/massageWeb.jpeg",
-    descriptionKey: "projects.descriptions.massage",
-    techStack: ["C#", "Angular", "TypeScript", "JavaScript"],
-    srcURL: "https://massages-frontend.vercel.app",
+    {
+    title: "Unidrop",
+    thumbnail: "/img/profile_pic/Unidrop.jpeg",
+    descriptionKey: "projects.descriptions.unidrop",
+    techStack:["NestJS", "Prisma", "PostgreSQL", "AWS", "ETL", "Node.js"],
+    srcURL: "https://www.unidrop.com.ar/#hero",
   },
-   {
-    title: "Pokédex",
-    thumbnail: "/img/profile_pic/pokédex_website.jpeg",
-    descriptionKey: "projects.descriptions.pokédex",
-    techStack: ["Vue", "JavaScript"],
-    srcURL: "https://global66-pokedex.vercel.app/",
+     {
+    title: "Unistore",
+    thumbnail: "/img/profile_pic/Unistore.jpeg",
+    descriptionKey: "projects.descriptions.unistore",
+  techStack:["NestJS", "Prisma", "PostgreSQL", "AWS", "ETL", "Node.js"],
+    srcURL: "https://www.unistore.com.ar/",
   },
+  // {
+  //   title: "Massage UI",
+  //   thumbnail: "/img/profile_pic/massageWeb.jpeg",
+  //   descriptionKey: "projects.descriptions.massage",
+  //   techStack: ["C#", "Angular", "TypeScript", "JavaScript"],
+  //   srcURL: "https://massages-frontend.vercel.app",
+  // },
+  // {
+  //   title: "Pokédex",
+  //   thumbnail: "/img/profile_pic/pokédex_website.jpeg",
+  //   descriptionKey: "projects.descriptions.pokédex",
+  //   techStack: ["Vue", "JavaScript"],
+  //   srcURL: "https://global66-pokedex.vercel.app/",
+  // },
 ];
 
 function loadContent(projectData) {
-  const lang = localStorage.getItem('lang') || 'en';
+  const lang = localStorage.getItem("lang") || "en";
   const translations = window.translations;
 
   // Si no se han cargado las traducciones, sal de la función.
   if (!translations) {
-      console.error("Traducciones no cargadas. Intentando de nuevo en un momento...");
-      setTimeout(() => loadContent(projectData), 200);
-      return;
+    console.error(
+      "Traducciones no cargadas. Intentando de nuevo en un momento...",
+    );
+    setTimeout(() => loadContent(projectData), 200);
+    return;
   }
 
   const buildTemplate = (template, data) => {
@@ -953,13 +976,15 @@ function loadContent(projectData) {
       .map((tech) => `<span class="stack-badge">${tech}</span>`)
       .join(" ");
 
-    const description = translations[lang] && translations[lang][data.descriptionKey]
-      ? translations[lang][data.descriptionKey]
-      : "Description not found.";
+    const description =
+      translations[lang] && translations[lang][data.descriptionKey]
+        ? translations[lang][data.descriptionKey]
+        : "Description not found.";
 
-    const demoText = translations[lang] && translations[lang]['btn.demo']
-      ? translations[lang]['btn.demo']
-      : "View Demo";
+    const demoText =
+      translations[lang] && translations[lang]["btn.demo"]
+        ? translations[lang]["btn.demo"]
+        : "View Demo";
 
     const elem = document.createElement("div");
     elem.classList.add("project-card");
@@ -974,7 +999,7 @@ function loadContent(projectData) {
       <div class="card-buttons">
         <a href="{srcURL}" target="_blank" class="card-btn" style="float: right; color: #fff; background-color: #68d372; padding: .375rem .75rem; border-radius: .25rem;"><i class="fa-solid fa-display"></i>${demoText}</a>
       </div>`,
-      data
+      data,
     );
 
     setTimeout(() => {
@@ -991,12 +1016,14 @@ function loadContent(projectData) {
   const navElem = document.querySelector(".navigation");
 
   if (!projectsElem || !navElem) {
-    console.error("No se encontraron los elementos .project-data o .navigation en el DOM.");
+    console.error(
+      "No se encontraron los elementos .project-data o .navigation en el DOM.",
+    );
     return;
   }
 
-  projectsElem.innerHTML = '';
-  navElem.innerHTML = '';
+  projectsElem.innerHTML = "";
+  navElem.innerHTML = "";
 
   let paused = false;
   projectsElem.addEventListener("mouseenter", () => {
@@ -1025,7 +1052,7 @@ function loadContent(projectData) {
       ProjectCard({
         ...project,
         rotation: i * rotationAmt,
-      })
+      }),
     );
     const navBtn = document.createElement("div");
     navBtn.classList.add("nav-dot");
@@ -1104,13 +1131,15 @@ function loadContent(projectData) {
 // document.addEventListener('translationsLoaded', () => {
 //     loadContent(projectData);
 // });
-document.addEventListener('languageChanged', () => {
-    loadContent(projectData);
+document.addEventListener("languageChanged", () => {
+  loadContent(projectData);
 });
 
 async function getRepoList() {
   try {
-    const response = await fetch("https://api.github.com/users/maurocandia89/repos");
+    const response = await fetch(
+      "https://api.github.com/users/maurocandia89/repos",
+    );
     const data = await response.json();
     return data;
   } catch (err) {
@@ -1118,8 +1147,7 @@ async function getRepoList() {
   }
 }
 
-(async function() {
+(async function () {
   const repoList = await getRepoList();
   console.log(repoList);
 })();
-

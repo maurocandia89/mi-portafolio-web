@@ -746,12 +746,15 @@ h6 {
 #skills .container .div-card .git {
   background-image: url("../img/icon/git.png");
 }
+
+#skills .container .div-card .aws {
+  background-image: url("../img/icon/amazon.png");
+}
+
 #skills .container .div-card .docker {
   background-image: url("../img/icon/docker.png");
 }
-#skills .container .div-card .devops {
-  background-image: url("../img/icon/devops.png");
-}
+
 #skills .container .div-card .vercel {
   background-image: url("../img/icon/vercel.png");
 }
