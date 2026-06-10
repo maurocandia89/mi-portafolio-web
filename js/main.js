@@ -845,38 +845,38 @@ VanillaTilt.init(document.querySelector(".bio-img"), {
 });
 
 // Contact form status handling
-var form = document.getElementById("contactForm");
+// var form = document.getElementById("contactForm");
 
-async function handleSubmit(event) {
-  event.preventDefault();
-  var status = document.getElementById("form-message"); // Corregido: el ID es form-message en tu HTML
-  var data = new FormData(event.target);
-  fetch(event.target.action, {
-    method: form.method,
-    body: data,
-    headers: {
-      Accept: "application/json",
-    },
-  })
-    .then((response) => {
-      // Usar sweetalert2 para una mejor experiencia
-      Swal.fire({
-        title: "¡Gracias!",
-        text: "Tu mensaje fue enviado con éxito. ¡Te responderé pronto!",
-        icon: "success",
-      });
-      form.reset();
-    })
-    .catch((error) => {
-      Swal.fire({
-        title: "¡Oops!",
-        text: "Hubo un problema al enviar el mensaje. Por favor, refresca la página e inténtalo de nuevo más tarde.",
-        icon: "error",
-      });
-      form.reset();
-    });
-}
-form.addEventListener("submit", handleSubmit);
+// async function handleSubmit(event) {
+//   event.preventDefault();
+//   var status = document.getElementById("form-message"); // Corregido: el ID es form-message en tu HTML
+//   var data = new FormData(event.target);
+//   fetch(event.target.action, {
+//     method: form.method,
+//     body: data,
+//     headers: {
+//       Accept: "application/json",
+//     },
+//   })
+//     .then((response) => {
+//       // Usar sweetalert2 para una mejor experiencia
+//       Swal.fire({
+//         title: "¡Gracias!",
+//         text: "Tu mensaje fue enviado con éxito. ¡Te responderé pronto!",
+//         icon: "success",
+//       });
+//       form.reset();
+//     })
+//     .catch((error) => {
+//       Swal.fire({
+//         title: "¡Oops!",
+//         text: "Hubo un problema al enviar el mensaje. Por favor, refresca la página e inténtalo de nuevo más tarde.",
+//         icon: "error",
+//       });
+//       form.reset();
+//     });
+// }
+// form.addEventListener("submit", handleSubmit);
 
 // ... (tu código del formulario de contacto aquí) ...
 
@@ -887,6 +887,7 @@ const projectData = [
     thumbnail: "/img/profile_pic/MetroIN.jpeg",
     descriptionKey: "projects.descriptions.metroin",
     techStack: ["C#", "Asp.Net", "TypeScript", "JavaScript"],
+    // status: "discontinued",
     srcURL: "https://metroin.com.ar/",
   },
   {
@@ -894,16 +895,18 @@ const projectData = [
     thumbnail: "/img/profile_pic/appTrabajador.jpeg",
     descriptionKey: "projects.descriptions.apptrabajador",
     techStack: ["NET MAUI", "C#"],
-    srcURL:
-      "https://play.google.com/store/apps/details?id=ar.com.metroin.apptrabajador",
+     status: "historical",
+    // srcURL:
+    //   "https://play.google.com/store/apps/details?id=ar.com.metroin.apptrabajador",
   },
   {
     title: "APP Garita",
     thumbnail: "/img/profile_pic/appGarita.jpeg",
     descriptionKey: "projects.descriptions.appgarita",
     techStack: ["NET MAUI", "C#"],
-    srcURL:
-      "https://play.google.com/store/apps/details?id=ar.com.metroin.appgarita",
+     status: "historical",
+    // srcURL:
+    //   "https://play.google.com/store/apps/details?id=ar.com.metroin.appgarita",
   },
   {
     title: "Wabi Fun Club",
@@ -918,7 +921,8 @@ const projectData = [
     thumbnail: "/img/profile_pic/psgWeb.jpeg",
     descriptionKey: "projects.descriptions.psg",
     techStack: ["C#", "Angular", "TypeScript", "JavaScript"],
-    srcURL: "https://psg.web/",
+     status: "private",
+    // srcURL: "https://psg.web/",
   },
     {
     title: "Unidrop",
@@ -981,26 +985,68 @@ function loadContent(projectData) {
         ? translations[lang][data.descriptionKey]
         : "Description not found.";
 
+    // const demoText =
+    //   translations[lang] && translations[lang]["btn.demo"]
+    //     ? translations[lang]["btn.demo"]
+    //     : "View Demo";
+
     const demoText =
-      translations[lang] && translations[lang]["btn.demo"]
-        ? translations[lang]["btn.demo"]
-        : "View Demo";
+  translations[lang] && translations[lang]["btn.demo"]
+    ? translations[lang]["btn.demo"]
+    : "View Demo";
+
+const statusLabels = {
+  discontinued:
+    translations[lang] && translations[lang]["projects.status.discontinued"]
+      ? translations[lang]["projects.status.discontinued"]
+      : "Proyecto descontinuado",
+  private:
+    translations[lang] && translations[lang]["projects.status.private"]
+      ? translations[lang]["projects.status.private"]
+      : "Proyecto privado",
+  historical:
+    translations[lang] && translations[lang]["projects.status.historical"]
+      ? translations[lang]["projects.status.historical"]
+      : "Proyecto historico",
+};
+
+const projectAction = data.srcURL
+  ? `<a href="${data.srcURL}" target="_blank" class="card-btn">
+       <i class="fa-solid fa-display"></i>${demoText}
+     </a>`
+  : `<span class="project-status project-status-${data.status || "unavailable"}">
+       <i class="fa-solid fa-box-archive"></i>
+       ${statusLabels[data.status] || "Proyecto no disponible"}
+     </span>`;
 
     const elem = document.createElement("div");
     elem.classList.add("project-card");
     elem.style.setProperty("--rotation", data.rotation + "deg");
+    // elem.innerHTML = buildTemplate(
+    //   `<div class='projects-header'>
+    //     <img class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" src="{thumbnail}" alt="Card image cap">
+    //   </div>
+    //   <h5 class="card-title mt-3">{title}</h5>
+    //   <div class='content'>${description}</div>
+    //   <div class='technologies'>Tech Stack: ${techStackData}</div>
+    //   <div class="card-buttons">
+    //     <a href="{srcURL}" target="_blank" class="card-btn" style="float: right; color: #fff; background-color: #68d372; padding: .375rem .75rem; border-radius: .25rem;"><i class="fa-solid fa-display"></i>${demoText}</a>
+    //   </div>`,
+    //   data,
+    // );
+
     elem.innerHTML = buildTemplate(
-      `<div class='projects-header'>
-        <img class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" src="{thumbnail}" alt="Card image cap">
-      </div>
-      <h5 class="card-title mt-3">{title}</h5>
-      <div class='content'>${description}</div>
-      <div class='technologies'>Tech Stack: ${techStackData}</div>
-      <div class="card-buttons">
-        <a href="{srcURL}" target="_blank" class="card-btn" style="float: right; color: #fff; background-color: #68d372; padding: .375rem .75rem; border-radius: .25rem;"><i class="fa-solid fa-display"></i>${demoText}</a>
-      </div>`,
-      data,
-    );
+  `<div class='projects-header'>
+    <img class="card-img-top img-fluid" style="height: 200px; object-fit: cover;" src="{thumbnail}" alt="Card image cap">
+  </div>
+  <h5 class="card-title mt-3">{title}</h5>
+  <div class='content'>${description}</div>
+  <div class='technologies'>Tech Stack: ${techStackData}</div>
+  <div class="card-buttons">
+    ${projectAction}
+  </div>`,
+  data,
+);
 
     setTimeout(() => {
       if (elem.children[2].scrollHeight > elem.children[2].clientHeight) {
